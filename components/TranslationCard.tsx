@@ -12,7 +12,7 @@ export function TranslationCard({ t, showArtist = true }: { t: Translation; show
         <span className="card-desc">{t.description}</span>
         <span className="card-tags">
           <StatusBadge status={t.status} />
-          {t.kind === "reverse" && <span className="badge badge-reverse">EN → JP</span>}
+          {t.notes > 0 && <span className="badge badge-notes">{t.notes} note{t.notes === 1 ? "" : "s"}</span>}
         </span>
       </Link>
     </li>

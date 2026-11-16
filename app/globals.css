@@ -13,8 +13,8 @@
   --rough-bg: #fbe6da;
   --draft: #4c5a73;
   --draft-bg: #e7ecf4;
-  --reverse-bg: #e9f2ea;
-  --reverse: #2f6a3a;
+  --notes-bg: #ece9f6;
+  --notes: #4a3f7a;
   --radius: 12px;
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Sans", "Hiragino Kaku Gothic ProN",
     "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif;
@@ -38,8 +38,8 @@
     --rough-bg: #3c2418;
     --draft: #b7c4dc;
     --draft-bg: #262d3a;
-    --reverse-bg: #1f3324;
-    --reverse: #9fd3a8;
+    --notes-bg: #2a2640;
+    --notes: #c5bdf0;
     color-scheme: dark;
   }
 }
@@ -199,7 +199,7 @@ code { font-size: 0.9em; background: var(--accent-soft); padding: 0.1em 0.35em; 
 .badge-partial { color: var(--partial); background: var(--partial-bg); }
 .badge-rough { color: var(--rough); background: var(--rough-bg); }
 .badge-draft { color: var(--draft); background: var(--draft-bg); }
-.badge-reverse { color: var(--reverse); background: var(--reverse-bg); }
+.badge-notes { color: var(--notes); background: var(--notes-bg); text-transform: none; letter-spacing: 0; }
 
 /* ---------- index lists ---------- */
 .index-list { list-style: none; padding: 0; margin: 20px 0 0; border-top: 1px solid var(--line); }
@@ -269,3 +269,79 @@ code { font-size: 0.9em; background: var(--accent-soft); padding: 0.1em 0.35em; 
   .lyrics td:empty { display: none; }
   .lyrics td:not(.ja):not(:last-child) { color: var(--muted); font-size: 0.95em; }
 }
+
+/* ---------- translator's notes (from the Google Docs comments) ---------- */
+.notes-hint { font-size: 0.88rem; color: var(--muted); margin: -12px 0 20px; }
+.lyrics .anno {
+  text-decoration: underline dotted var(--notes);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.lyrics .anno.is-active { background: var(--notes-bg); }
+.lyrics .note-ref {
+  display: inline-block;
+  min-width: 1.5em;
+  margin-left: 2px;
+  padding: 0 4px;
+  font-size: 0.7em;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+  vertical-align: super;
+  color: var(--notes);
+  background: var(--notes-bg);
+  border-radius: 999px;
+  text-decoration: none;
+}
+.lyrics .note-ref:focus-visible { outline: 2px solid var(--notes); }
+.lyrics .notes { margin-top: 40px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 0.95rem; }
+.lyrics .notes h2 { font-size: 1.15rem; }
+.lyrics .notes ol { padding-left: 1.6em; }
+.lyrics .notes li { margin: 0 0 10px; scroll-margin-top: 72px; }
+.lyrics .notes li:target { background: var(--notes-bg); border-radius: 6px; }
+.note-back { text-decoration: none; font-size: 0.9em; }
+.lyrics .note-ref { scroll-margin-top: 90px; }
+
+.note-pop {
+  position: absolute;
+  z-index: 40;
+  width: min(340px, calc(100vw - 32px));
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px rgb(0 0 0 / 0.18);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.note-pop:focus { outline: none; }
+.note-pop.is-sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  max-height: 55vh;
+  overflow-y: auto;
+  border-radius: 16px 16px 0 0;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.note-pop-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 8px 0 16px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--notes);
+}
+.note-pop-head button {
+  width: 36px; height: 36px; border: 0; background: none; color: var(--muted);
+  font-size: 1.4rem; line-height: 1; cursor: pointer; border-radius: 8px;
+}
+.note-pop-body { padding: 4px 16px 14px; }

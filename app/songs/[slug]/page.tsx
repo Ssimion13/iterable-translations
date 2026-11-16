@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { NotePopover } from "@/components/NotePopover";
 import { StatusBadge } from "@/components/StatusBadge";
 import {
   ORIGINALS,
@@ -52,12 +53,6 @@ export default async function SongPage({ params }: Props) {
               </dd>
             </div>
           )}
-          {t.kind === "reverse" && (
-            <div>
-              <dt>Direction</dt>
-              <dd>English → Japanese</dd>
-            </div>
-          )}
         </dl>
         <p className="song-desc">{t.description}</p>
         {t.status !== "complete" && (
@@ -67,7 +62,13 @@ export default async function SongPage({ params }: Props) {
         )}
       </header>
 
+      {t.notes > 0 && (
+        <p className="notes-hint">
+          Underlined words and numbered markers have translator’s notes — tap one to read it. All notes are also listed at the end.
+        </p>
+      )}
       <div className="lyrics" dangerouslySetInnerHTML={{ __html: getBody(t.slug) }} />
+      {t.notes > 0 && <NotePopover />}
 
       {versions.length > 0 && (
         <aside className="versions">

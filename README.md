@@ -34,7 +34,11 @@ Static hosting (GitHub Pages, Cloudflare Pages, S3…): uncomment `output: "expo
   - Give two entries the same `song` key to link them as versions of each other.
   - Give an entry an `original` key to put it on that original song's page.
   - Entries with `status: "untranslated"` get no page.
+  - `notes` is the number of translator's notes in the body (from the Google Docs comments).
 - `content/translations/<slug>.html` — the lyrics/translation body, converted from the
+  original .docx files. Translator's notes are `<a class="note-ref">` markers (with the
+  commented words wrapped in `<span class="anno">`) plus a `<section class="notes">` list
+  at the end; the popup reads its text from that list. Converted from the
   original .docx files. Plain HTML: edit freely. Cells/paragraphs with `class="ja"` get
   Japanese styling.
 - `public/media/<slug>/` — images that were embedded in the documents.
