@@ -27,10 +27,25 @@ export function getBody(slug: string): string {
   return fs.readFileSync(path.join(process.cwd(), "content", "translations", `${slug}.html`), "utf8");
 }
 
-/** Other versions (drafts / alternates) of the same lyrics. */
+/** Every version of the same lyrics (including `t`), newest edit first. Empty if there's only one. */
 export function versionsOf(t: Translation) {
   if (!t.song) return [];
-  return published.filter((o) => o.song === t.song && o.slug !== t.slug);
+  const all = published.filter((o) => o.song === t.song);
+  return all.length > 1 ? all.sort((a, b) => b.lastEdited.localeCompare(a.lastEdited)) : [];
+}
+
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+/** "2022-08-26" -> "Aug 2022" */
+export function monthYear(iso: string) {
+  const [y, m] = iso.split("-");
+  return `${MONTHS[Number(m) - 1]} ${y}`;
+}
+/** A date range of notes, e.g. "Mar–Apr 2022" or "Mar 2022 – Oct 2023". */
+export function monthRange([a, b]: [string, string]) {
+  const [fa, fb] = [monthYear(a), monthYear(b)];
+  if (fa === fb) return fa;
+  if (a.slice(0, 4) === b.slice(0, 4)) return `${fa.slice(0, 3)}–${fb}`;
+  return `${fa} – ${fb}`;
 }
 
 export const UNSORTED_ARTIST = "unsorted";
@@ -75,6 +90,6 @@ export const STATUS_NOTE: Record<Status, string> = {
   complete: "",
   partial: "Parts of this song haven't been translated yet.",
   rough: "This translation was flagged for revision — expect rough or uncertain lines.",
-  draft: "This is an older version. A newer translation of this song is linked below.",
+  draft: "This is an older version — see the list of versions below for the newer one.",
   untranslated: "",
 };

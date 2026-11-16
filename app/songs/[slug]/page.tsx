@@ -9,6 +9,8 @@ import {
   UNSORTED_ARTIST,
   artistName,
   getBody,
+  monthRange,
+  monthYear,
   getTranslation,
   published,
   versionsOf,
@@ -53,12 +55,46 @@ export default async function SongPage({ params }: Props) {
               </dd>
             </div>
           )}
+          <div>
+            <dt>Last edited</dt>
+            <dd>
+              <time dateTime={t.lastEdited}>{monthYear(t.lastEdited)}</time>
+              {t.dateNote && <span className="muted"> · {t.dateNote}</span>}
+            </dd>
+          </div>
+          {t.notesWritten && (
+            <div>
+              <dt>Notes written</dt>
+              <dd>{monthRange(t.notesWritten)}</dd>
+            </div>
+          )}
         </dl>
         <p className="song-desc">{t.description}</p>
         {t.status !== "complete" && (
           <p className={`notice notice-${t.status}`}>
             <StatusBadge status={t.status} /> {STATUS_NOTE[t.status]}
           </p>
+        )}
+        {versions.length > 0 && (
+          <nav className="versions" aria-label="Versions of this translation">
+            <h2>{versions.length} versions of this translation</h2>
+            <ol>
+              {versions.map((v) => (
+                <li key={v.slug} className={v.slug === t.slug ? "is-current" : undefined}>
+                  {v.slug === t.slug ? (
+                    <span aria-current="page">{v.title}</span>
+                  ) : (
+                    <Link href={`/songs/${v.slug}`}>{v.title}</Link>
+                  )}
+                  <span className="versions-meta">
+                    <StatusBadge status={v.status} />
+                    <time dateTime={v.lastEdited}>{monthYear(v.lastEdited)}</time>
+                    {v.slug === t.slug && <span className="muted">· you are here</span>}
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </nav>
         )}
       </header>
 
@@ -70,18 +106,6 @@ export default async function SongPage({ params }: Props) {
       <div className="lyrics" dangerouslySetInnerHTML={{ __html: getBody(t.slug) }} />
       {t.notes > 0 && <NotePopover />}
 
-      {versions.length > 0 && (
-        <aside className="versions">
-          <h2>Other versions of this translation</h2>
-          <ul>
-            {versions.map((v) => (
-              <li key={v.slug}>
-                <Link href={`/songs/${v.slug}`}>{v.title}</Link> <StatusBadge status={v.status} />
-              </li>
-            ))}
-          </ul>
-        </aside>
-      )}
     </article>
   );
 }

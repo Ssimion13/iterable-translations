@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { artistName, type Translation } from "@/lib/catalog";
+import { artistName, versionsOf, type Translation } from "@/lib/catalog";
 import { StatusBadge } from "./StatusBadge";
 
 export function TranslationCard({ t, showArtist = true }: { t: Translation; showArtist?: boolean }) {
@@ -13,6 +13,8 @@ export function TranslationCard({ t, showArtist = true }: { t: Translation; show
         <span className="card-tags">
           <StatusBadge status={t.status} />
           {t.notes > 0 && <span className="badge badge-notes">{t.notes} note{t.notes === 1 ? "" : "s"}</span>}
+          {versionsOf(t).length > 0 && <span className="badge badge-versions">{versionsOf(t).length} versions</span>}
+          <span className="card-date">Edited {t.lastEdited.slice(0, 4)}</span>
         </span>
       </Link>
     </li>

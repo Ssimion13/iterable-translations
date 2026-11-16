@@ -25,7 +25,7 @@ export default async function OriginalPage({ params }: Props) {
     <>
       <p className="crumb"><Link href="/originals">← Original songs</Link></p>
       <h1 lang="ja">{o.title}</h1>
-      <p className="song-ja">{o.titleEn}</p>
+      {o.titleEn !== o.title && <p className="song-ja">{o.titleEn}</p>}
       <p className="muted">{o.source}</p>
       {/* TODO: notes about the original song */}
       <h2>{items.length} translated arrange{items.length === 1 ? "" : "s"}</h2>
