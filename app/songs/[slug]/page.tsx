@@ -10,6 +10,7 @@ import {
   UNSORTED_ARTIST,
   artistName,
   getBody,
+  isGated,
   monthRange,
   monthYear,
   getTranslation,
@@ -30,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t.titleJa ? `${t.title} (${t.titleJa})` : t.title,
     description: t.description,
-    ...(t.nsfw ? { robots: { index: false } } : {}),
+    ...(t.nsfw || t.status === "untranslated" ? { robots: { index: false } } : {}),
   };
 }
 
@@ -75,6 +76,11 @@ export default async function SongPage({ params }: Props) {
           )}
         </dl>
         <p className="song-desc">{t.description}</p>
+        {t.nsfw && !isGated(t) && (
+          <p className="notice notice-nsfw">
+            <span className="badge badge-nsfw">NSFW</span> These lyrics have explicit content.
+          </p>
+        )}
         {t.status !== "complete" && (
           <p className={`notice notice-${t.status}`}>
             <StatusBadge status={t.status} /> {STATUS_NOTE[t.status]}
@@ -113,5 +119,5 @@ export default async function SongPage({ params }: Props) {
 
     </article>
   );
-  return t.nsfw ? <NsfwGate>{page}</NsfwGate> : page;
+  return isGated(t) ? <NsfwGate>{page}</NsfwGate> : page;
 }

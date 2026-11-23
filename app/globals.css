@@ -370,6 +370,9 @@ code { font-size: 0.9em; background: var(--accent-soft); padding: 0.1em 0.35em; 
 
 /* ---------- NSFW section ---------- */
 .badge-nsfw { color: var(--nsfw); background: var(--nsfw-bg); }
+.badge-untranslated { color: var(--muted); background: var(--line); }
+.notice-nsfw { border-color: var(--nsfw); }
+.notice-untranslated { border-color: var(--muted); }
 .nsfw-placeholder { min-height: 40vh; }
 .nsfw-dialog {
   width: min(440px, calc(100vw - 32px));

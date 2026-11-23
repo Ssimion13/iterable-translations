@@ -33,7 +33,8 @@ Static hosting (GitHub Pages, Cloudflare Pages, S3…): uncomment `output: "expo
   - Changing a translation's `slug` changes its URL.
   - Give two entries the same `song` key to link them as versions of each other.
   - Give an entry an `original` key to put it on that original song's page.
-  - Entries with `status: "untranslated"` get no page.
+  - Entries with `status: "untranslated"` appear only in `/untranslated` (an untranslated
+    NSFW song goes there too, with an NSFW note at the top instead of the age notice).
   - `nsfw: true` moves a song out of every normal listing and into `/nsfw`, behind an
     age notice (also shown when someone opens the song's link directly).
   - `notes` is the number of translator's notes in the body (from the Google Docs comments).

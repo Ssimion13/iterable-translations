@@ -11,15 +11,17 @@ import {
 export { ARTISTS, ORIGINALS };
 export type { Status, Translation };
 
-/** Pages for these statuses are not generated (lyrics with no translation). */
-const HIDDEN: Status[] = ["untranslated"];
+/** Every entry gets a page. */
+export const published = TRANSLATIONS;
+/** Lyrics with no translation yet — they live only in the Untranslated section. */
+export const untranslatedList = published.filter((t) => t.status === "untranslated");
+/** The NSFW section (translated NSFW songs; untranslated ones go to Untranslated instead). */
+export const nsfwList = published.filter((t) => t.nsfw && t.status !== "untranslated");
+/** What the general listings show. */
+export const listed = published.filter((t) => !t.nsfw && t.status !== "untranslated");
 
-/** Every translation that gets a page (NSFW included). */
-export const published = TRANSLATIONS.filter((t) => !HIDDEN.includes(t.status));
-/** What the general listings show — NSFW songs live only in the NSFW section. */
-export const listed = published.filter((t) => !t.nsfw);
-/** The NSFW section. */
-export const nsfwList = published.filter((t) => t.nsfw);
+/** NSFW songs that are translated sit behind the age notice. */
+export const isGated = (t: Translation) => !!t.nsfw && t.status !== "untranslated";
 
 const collator = new Intl.Collator("en", { sensitivity: "base", numeric: true });
 export const byTitle = (a: Translation, b: Translation) => collator.compare(a.title, b.title);
@@ -96,5 +98,5 @@ export const STATUS_NOTE: Record<Status, string> = {
   partial: "Parts of this song haven't been translated yet.",
   rough: "This translation was flagged for revision — expect rough or uncertain lines.",
   draft: "This is an older version — see the list of versions below for the newer one.",
-  untranslated: "",
+  untranslated: "These are the lyrics only — there's no translation yet.",
 };
