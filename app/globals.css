@@ -360,3 +360,6 @@ code { font-size: 0.9em; background: var(--accent-soft); padding: 0.1em 0.35em; 
   font-size: 1.4rem; line-height: 1; cursor: pointer; border-radius: 8px;
 }
 .note-pop-body { padding: 4px 16px 14px; }
+
+/* Highlights carried over from Google Docs (mostly white, from pasted web text) — never show them. */
+.lyrics mark { background: none; color: inherit; }
