@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { published, originalKeys, artistKeys } from "@/lib/catalog";
+import { listed, originalKeys, artistKeys } from "@/lib/catalog";
 
 // Landing page — placeholder content, to be written later.
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
       <ul className="landing-links">
         <li>
           <Link href="/songs">All translations</Link>
-          <span>{published.length} songs</span>
+          <span>{listed.length} songs</span>
         </li>
         <li>
           <Link href="/artists">Browse by artist</Link>

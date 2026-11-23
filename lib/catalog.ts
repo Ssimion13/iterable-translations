@@ -14,7 +14,12 @@ export type { Status, Translation };
 /** Pages for these statuses are not generated (lyrics with no translation). */
 const HIDDEN: Status[] = ["untranslated"];
 
+/** Every translation that gets a page (NSFW included). */
 export const published = TRANSLATIONS.filter((t) => !HIDDEN.includes(t.status));
+/** What the general listings show — NSFW songs live only in the NSFW section. */
+export const listed = published.filter((t) => !t.nsfw);
+/** The NSFW section. */
+export const nsfwList = published.filter((t) => t.nsfw);
 
 const collator = new Intl.Collator("en", { sensitivity: "base", numeric: true });
 export const byTitle = (a: Translation, b: Translation) => collator.compare(a.title, b.title);
@@ -51,7 +56,7 @@ export function monthRange([a, b]: [string, string]) {
 export const UNSORTED_ARTIST = "unsorted";
 
 export function artistKeys() {
-  const keys = new Set(published.map((t) => t.artist ?? UNSORTED_ARTIST));
+  const keys = new Set(listed.map((t) => t.artist ?? UNSORTED_ARTIST));
   return [...keys].sort((a, b) => {
     if (a === UNSORTED_ARTIST) return 1;
     if (b === UNSORTED_ARTIST) return -1;
@@ -64,18 +69,18 @@ export function artistName(key: string) {
 }
 
 export function byArtist(key: string) {
-  return published
+  return listed
     .filter((t) => (t.artist ?? UNSORTED_ARTIST) === key)
     .sort(byTitle);
 }
 
 export function originalKeys() {
-  const keys = new Set(published.flatMap((t) => (t.original ? [t.original] : [])));
+  const keys = new Set(listed.flatMap((t) => (t.original ? [t.original] : [])));
   return [...keys].sort((a, b) => byOriginal(b).length - byOriginal(a).length || collator.compare(ORIGINALS[a].titleEn, ORIGINALS[b].titleEn));
 }
 
 export function byOriginal(key: string) {
-  return published.filter((t) => t.original === key).sort(byTitle);
+  return listed.filter((t) => t.original === key).sort(byTitle);
 }
 
 export const STATUS_LABEL: Record<Status, string> = {

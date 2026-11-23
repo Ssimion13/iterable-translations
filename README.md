@@ -34,6 +34,8 @@ Static hosting (GitHub Pages, Cloudflare Pages, S3…): uncomment `output: "expo
   - Give two entries the same `song` key to link them as versions of each other.
   - Give an entry an `original` key to put it on that original song's page.
   - Entries with `status: "untranslated"` get no page.
+  - `nsfw: true` moves a song out of every normal listing and into `/nsfw`, behind an
+    age notice (also shown when someone opens the song's link directly).
   - `notes` is the number of translator's notes in the body (from the Google Docs comments).
 - `content/translations/<slug>.html` — the lyrics/translation body, converted from the
   original .docx files. Translator's notes are `<a class="note-ref">` markers (with the

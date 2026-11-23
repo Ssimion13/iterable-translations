@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { NotePopover } from "@/components/NotePopover";
+import { NsfwGate } from "@/components/NsfwGate";
 import { StatusBadge } from "@/components/StatusBadge";
 import {
   ORIGINALS,
@@ -26,7 +27,11 @@ export const dynamicParams = false;
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = getTranslation((await params).slug);
   if (!t) return {};
-  return { title: t.titleJa ? `${t.title} (${t.titleJa})` : t.title, description: t.description };
+  return {
+    title: t.titleJa ? `${t.title} (${t.titleJa})` : t.title,
+    description: t.description,
+    ...(t.nsfw ? { robots: { index: false } } : {}),
+  };
 }
 
 export default async function SongPage({ params }: Props) {
@@ -36,7 +41,7 @@ export default async function SongPage({ params }: Props) {
   const versions = versionsOf(t);
   const artistKey = t.artist ?? UNSORTED_ARTIST;
 
-  return (
+  const page = (
     <article className="song">
       <header className="song-header">
         <h1>{t.title}</h1>
@@ -108,4 +113,5 @@ export default async function SongPage({ params }: Props) {
 
     </article>
   );
+  return t.nsfw ? <NsfwGate>{page}</NsfwGate> : page;
 }

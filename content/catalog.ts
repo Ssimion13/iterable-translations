@@ -12,6 +12,7 @@ export interface Translation {
   artist?: string;        // key into ARTISTS
   original?: string;      // key into ORIGINALS (the tune it arranges)
   originalUnsure?: boolean;
+  nsfw?: boolean;          // true = only listed in the NSFW section, behind the age notice
   song?: string;          // translations sharing a key are versions/drafts of the same lyrics
   status: Status;
   description: string;
@@ -148,7 +149,7 @@ export const TRANSLATIONS: Translation[] = [
   { slug: "rock-rockabye-baby", title: "Rock! Rock-a-bye Baby", titleJa: "ロック！ロカバベイベ", status: "complete", description: "[TODO: add descriptions]", sourceFile: "ロック！ロカバベイベ.docx", notes: 0, lastEdited: "2023-09-04" },
   { slug: "subarashii", title: "Wonderful", titleJa: "素晴らしい", status: "complete", description: "[TODO: add descriptions]", sourceFile: "素晴らしい _0_.docx", notes: 2, lastEdited: "2023-12-23", notesWritten: ["2023-12-23", "2023-12-23"] },
   { slug: "miserable-no-shizuku", title: "Miserable Droplets", titleJa: "ミゼラブルの雫", status: "complete", description: "[TODO: add descriptions]", sourceFile: "ミゼラブルの雫_.docx", notes: 0, lastEdited: "2014-04-02" },
-  { slug: "ame-to-taieki-to-nioi", title: "Rain, Bodily Fluids, and Scent", titleJa: "雨と体液と匂い", status: "complete", description: "[TODO: add descriptions]", sourceFile: "雨と体液と匂い.docx", notes: 4, lastEdited: "2024-03-05", notesWritten: ["2024-03-05", "2024-03-05"] },
+  { slug: "ame-to-taieki-to-nioi", nsfw: true, title: "Rain, Bodily Fluids, and Scent", titleJa: "雨と体液と匂い", status: "complete", description: "[TODO: add descriptions]", sourceFile: "雨と体液と匂い.docx", notes: 4, lastEdited: "2024-03-05", notesWritten: ["2024-03-05", "2024-03-05"] },
   { slug: "hanipaganda", title: "Hanipaganda", titleJa: "ハニパガンダ", status: "complete", description: "[TODO: add descriptions]", sourceFile: "Hanipaganda.docx", notes: 2, lastEdited: "2024-07-09", notesWritten: ["2023-02-08", "2023-02-22"] },
   { slug: "satorare", title: "S.A.T.O.R.A.R.E", status: "complete", description: "[TODO: add descriptions]", sourceFile: "S.A.T.O.R.A.R.E_.docx", notes: 0, lastEdited: "2024-07-30" },
   { slug: "closed-to-you", title: "Closed to You", status: "complete", description: "[TODO: add descriptions]", sourceFile: "Closed to You.docx", notes: 0, lastEdited: "2022-04-10" },
@@ -178,7 +179,7 @@ export const TRANSLATIONS: Translation[] = [
   { slug: "star-velocity", title: "Star Velocity", status: "complete", description: "[TODO: add descriptions]", sourceFile: "Star Velocity.docx", notes: 0, lastEdited: "2015-07-27" },
   { slug: "the-city-of-you", title: "The City of You in My Imagination", status: "complete", description: "[TODO: add descriptions]", sourceFile: "The City of You in my Imagination.docx", notes: 0, lastEdited: "2021-04-27" },
   { slug: "machibito-kozu", title: "The Person I'm Waiting For Won't Come…", status: "complete", description: "[TODO: add descriptions]", sourceFile: "The Person I_m Waiting For Won_t Come.._.docx", notes: 0, lastEdited: "2016-03-27" },
-  { slug: "nightmare", title: "N-I-G-H-T-M-A-R-E", status: "complete", description: "[TODO: add descriptions]", sourceFile: "N-I-G-H-T-M-A-R-E.docx", notes: 0, lastEdited: "2019-11-08" },
+  { slug: "nightmare", nsfw: true, title: "N-I-G-H-T-M-A-R-E", status: "complete", description: "[TODO: add descriptions]", sourceFile: "N-I-G-H-T-M-A-R-E.docx", notes: 0, lastEdited: "2019-11-08" },
   { slug: "nexus-wing", title: "Nexus Wing", status: "complete", description: "[TODO: add descriptions]", sourceFile: "Nexus Wing.docx", notes: 0, lastEdited: "2021-04-23" },
   { slug: "party-wing", title: "Party Wing", status: "complete", description: "[TODO: add descriptions]", sourceFile: "Party Wing.docx", notes: 0, lastEdited: "2021-04-26" },
   { slug: "sakuretsu-irony", title: "Explosive Irony", status: "complete", description: "[TODO: add descriptions]", sourceFile: "Sakuretsu Irony.docx", notes: 0, lastEdited: "2014-12-23" },
@@ -205,5 +206,5 @@ export const TRANSLATIONS: Translation[] = [
   { slug: "suki-da-yo-lyrics", title: "I Love You… (lyrics only)", titleJa: "好きだよ", song: "suki-da-yo", status: "untranslated", description: "[TODO: add descriptions]", sourceFile: "好きだよ.docx", notes: 0, lastEdited: "2016-11-28" },
   { slug: "wareta-ringo", title: "Wareta Ringo", titleJa: "われたリンゴ", status: "untranslated", description: "[TODO: add descriptions]", sourceFile: "Wareta Ringo.docx", notes: 0, lastEdited: "2022-04-18" },
   { slug: "tsukiyo-no-nakimushi", title: "Crybaby of the Moonlit Night", titleJa: "月夜の泣き蟲", status: "untranslated", description: "[TODO: add descriptions]", sourceFile: "月夜の泣き蟲.docx", notes: 0, lastEdited: "2020-07-31" },
-  { slug: "monica", title: "Monica", status: "untranslated", description: "[TODO: add descriptions]", sourceFile: "Monica.docx", notes: 0, lastEdited: "2021-10-06" },
+  { slug: "monica", nsfw: true, title: "Monica", status: "untranslated", description: "[TODO: add descriptions]", sourceFile: "Monica.docx", notes: 0, lastEdited: "2021-10-06" },
 ];

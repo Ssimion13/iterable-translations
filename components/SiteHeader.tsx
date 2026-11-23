@@ -10,6 +10,7 @@ const NAV = [
   { href: "/songs", label: "All translations" },
   { href: "/artists", label: "By artist" },
   { href: "/originals", label: "By original song" },
+  { href: "/nsfw", label: "NSFW" },
 ];
 
 export function SiteHeader() {

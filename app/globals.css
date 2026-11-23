@@ -7,8 +7,10 @@
   --accent: #a2364f;
   --accent-soft: #f6e7ea;
   --ja: #3a3550;
-  --partial: #9a5b00;
-  --partial-bg: #fdf1dc;
+  --partial: #1d6a64;
+  --partial-bg: #def1ee;
+  --nsfw: #9b2c3f;
+  --nsfw-bg: #fbe4e8;
   --rough: #8a3b12;
   --rough-bg: #fbe6da;
   --draft: #4c5a73;
@@ -32,8 +34,10 @@
     --accent: #f08aa2;
     --accent-soft: #3a2530;
     --ja: #d9d3ee;
-    --partial: #f1c06b;
-    --partial-bg: #3a2d14;
+    --partial: #8fd6cc;
+    --partial-bg: #17302d;
+    --nsfw: #f4a3b2;
+    --nsfw-bg: #3d1d25;
     --rough: #f3a37a;
     --rough-bg: #3c2418;
     --draft: #b7c4dc;
@@ -363,3 +367,32 @@ code { font-size: 0.9em; background: var(--accent-soft); padding: 0.1em 0.35em; 
 
 /* Highlights carried over from Google Docs (mostly white, from pasted web text) — never show them. */
 .lyrics mark { background: none; color: inherit; }
+
+/* ---------- NSFW section ---------- */
+.badge-nsfw { color: var(--nsfw); background: var(--nsfw-bg); }
+.nsfw-placeholder { min-height: 40vh; }
+.nsfw-dialog {
+  width: min(440px, calc(100vw - 32px));
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 20px 50px rgb(0 0 0 / 0.25);
+}
+.nsfw-dialog::backdrop { background: rgb(0 0 0 / 0.55); backdrop-filter: blur(6px); }
+.nsfw-dialog h2 { margin: 0 0 8px; font-size: 1.2rem; }
+.nsfw-dialog p { margin: 0 0 20px; }
+.nsfw-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
+.nsfw-actions button {
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-primary { border: 0; background: var(--accent); color: var(--bg); }
+.btn-secondary { border: 1px solid var(--line); background: transparent; color: var(--text); }
+.nsfw-actions button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 420px) { .nsfw-actions button { flex: 1; } }
