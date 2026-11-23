@@ -52,6 +52,12 @@ export default async function SongPage({ params }: Props) {
             <dt>Artist</dt>
             <dd><Link href={`/artists/${artistKey}`}>{artistName(artistKey)}</Link></dd>
           </div>
+          {t.character && (
+            <div>
+              <dt>Character</dt>
+              <dd>{t.character}</dd>
+            </div>
+          )}
           {original && (
             <div>
               <dt>Original</dt>

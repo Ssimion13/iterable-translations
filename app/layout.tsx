@@ -22,7 +22,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <SiteHeader />
         <main className="page">{children}</main>
-        <footer className="site-footer">Translations are fan work, shared for study and enjoyment.</footer>
+        <footer className="site-footer">
+          <p>
+            Translations by AeroReborn (<a href="mailto:aeroreborn@gmail.com">aeroreborn@gmail.com</a>).
+          </p>
+          <p>
+            Translations are fan work, shared for study. The songs and lyrics are not my property — they belong to
+            their original artists and are posted only to help people understand them. If you’re a creator and would
+            rather your work not appear here, please <a href="mailto:aeroreborn@gmail.com">email me</a> and I’ll take it
+            down.
+          </p>
+        </footer>
       </body>
     </html>
   );

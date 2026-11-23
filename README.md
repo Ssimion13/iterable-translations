@@ -31,7 +31,9 @@ Static hosting (GitHub Pages, Cloudflare Pages, S3…): uncomment `output: "expo
   status (`complete` / `partial` / `rough` / `draft` / `untranslated`) and the card
   description for every translation, plus the lists of artists and original songs.
   - Changing a translation's `slug` changes its URL.
-  - Give two entries the same `song` key to link them as versions of each other.
+  - Give two entries the same `song` key to link them as versions of each other. Listings
+    show only the most recently edited version; the others are linked from its page.
+  - `character` shows a "Character" line on the song page.
   - Give an entry an `original` key to put it on that original song's page.
   - Entries with `status: "untranslated"` appear only in `/untranslated` (an untranslated
     NSFW song goes there too, with an NSFW note at the top instead of the age notice).

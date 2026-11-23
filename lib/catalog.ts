@@ -17,8 +17,23 @@ export const published = TRANSLATIONS;
 export const untranslatedList = published.filter((t) => t.status === "untranslated");
 /** The NSFW section (translated NSFW songs; untranslated ones go to Untranslated instead). */
 export const nsfwList = published.filter((t) => t.nsfw && t.status !== "untranslated");
+/**
+ * Listings show one card per song: when there are several versions of the same
+ * lyrics, only the most recently edited one is listed (the rest stay reachable
+ * from its versions box).
+ */
+function newestPerSong(items: Translation[]) {
+  const best = new Map<string, Translation>();
+  for (const t of items) {
+    const key = t.song ?? t.slug;
+    const cur = best.get(key);
+    if (!cur || t.lastEdited > cur.lastEdited) best.set(key, t);
+  }
+  return items.filter((t) => best.get(t.song ?? t.slug) === t);
+}
+
 /** What the general listings show. */
-export const listed = published.filter((t) => !t.nsfw && t.status !== "untranslated");
+export const listed = newestPerSong(published.filter((t) => !t.nsfw && t.status !== "untranslated"));
 
 /** NSFW songs that are translated sit behind the age notice. */
 export const isGated = (t: Translation) => !!t.nsfw && t.status !== "untranslated";
